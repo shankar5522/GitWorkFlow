@@ -13,7 +13,7 @@ timeFormat = '{:%H:%M:%S}'
 @given(u'user logs in GitHub using basic authentication')
 def test_gitHubLoginImpl():
     githubLogin()
-    print ('manish')
+    print ('manish Dev')
 
 def githubLogin():
     print ('abc')
