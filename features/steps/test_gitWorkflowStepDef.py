@@ -15,14 +15,19 @@ def test_gitHubLoginImpl():
     githubLogin()
 
 
-def githubLogin():
-    userData = requests.post(BASE_API).json()
-    print (userData)
-
-
 @when(u'user creates repository with name "git_flow_task" + suffix current time')
 def test_repoCreationStepImpl():
     createRepository()
+
+
+@when(u'user creates branch "feature/git_flow_feature"')
+def test_branchCreationImpl():
+    createBranch()
+
+
+def githubLogin():
+    userData = requests.post(BASE_API).json()
+    print (userData)
 
 
 def createRepository():
@@ -32,3 +37,9 @@ def createRepository():
     print ('Repository Name ' + repo)
     payload = {'name': repo, 'description': 'Created with api', 'auto_init': 'true'}
     login = requests.post(BASE_API + 'user/repos', auth=(userName, token), data=json.dumps(payload))
+
+
+def createBranch():
+    payload = {"ref": "refs/heads/pythonAutoBranch", "sha": "5376df2"}
+    branchName = requests.get('https://api.github.com/repos/shankar5522/GitWorkFlow/branches', data=json.dumps(payload))
+    print branchName
